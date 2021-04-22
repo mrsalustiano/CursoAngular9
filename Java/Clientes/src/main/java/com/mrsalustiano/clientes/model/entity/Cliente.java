@@ -9,8 +9,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.PrePersist;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.br.CPF;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+
 
 @Entity
 public class Cliente implements Serializable {
@@ -22,12 +27,15 @@ public class Cliente implements Serializable {
 	private Integer id;
 	
 	@Column(nullable = false, length = 150)
+	@NotEmpty(message = "{campo.nome.obrigatorio}")
 	private String nome;
 	
 	@Column(nullable = false, length = 11)
+	@NotNull(message = "{campo.cfp.obrigatorio")
+	@CPF(message = "{campo.cpf.invalido}")
 	private String cpf;
 	
-	@Column(nullable = false, name = "data_cadastro")
+	@Column(nullable = false, name = "data_cadastro", updatable = false)
 	@JsonFormat(pattern = "dd/MM/yyyy")
 	private LocalDate dataCadastro;
 
