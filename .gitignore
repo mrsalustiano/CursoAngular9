@@ -2,6 +2,7 @@
 # Created by https://www.toptal.com/developers/gitignore/api/java,angular
 # Edit at https://www.toptal.com/developers/gitignore?templates=java,angular
 sts/
+.pdf
 
 ### Angular ###
 ## Angular ##
