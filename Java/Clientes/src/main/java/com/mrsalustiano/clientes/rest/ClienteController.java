@@ -27,11 +27,15 @@ import com.mrsalustiano.clientes.model.repository.ClienteRepository;
 public class ClienteController {
 
 	@Autowired ClienteRepository repository;
+
 	
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	public Cliente Salvar(@RequestBody @Valid Cliente cliente) {
+	
+		
 		return repository.save(cliente);
+	
 		
 	}
 	

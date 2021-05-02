@@ -2,6 +2,7 @@ package com.mrsalustiano.clientes.model.entity;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,8 +12,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Entity
-public class Servicos implements Serializable {
+public class ServicoPrestado implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 
@@ -30,20 +33,27 @@ public class Servicos implements Serializable {
 	@Column
 	private BigDecimal valor;
 
+	@Column
+	@JsonFormat(pattern = "dd/MM/yyyy")
+	private LocalDate data;
 	
 	
-	public Servicos() {
+	public ServicoPrestado() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
 	
-	public Servicos(String descricao, Cliente cliente, BigDecimal valor) {
+	public ServicoPrestado(Integer id, String descricao, Cliente cliente, BigDecimal valor, LocalDate data) {
 		super();
+		this.id = id;
 		this.descricao = descricao;
 		this.cliente = cliente;
 		this.valor = valor;
+		this.data = data;
 	}
+
+
 
 
 	public Integer getId() {
@@ -77,22 +87,38 @@ public class Servicos implements Serializable {
 	public void setValor(BigDecimal valor) {
 		this.valor = valor;
 	}
+	
+	
+
+	public LocalDate getData() {
+		return data;
+	}
+
+
+	public void setData(LocalDate data) {
+		this.data = data;
+	}
+
 
 	@Override
 	public String toString() {
-		return "Servicos [id=" + id + ", descricao=" + descricao + ", cliente=" + cliente + ", valor=" + valor + "]";
+		return "ServicosPrestado [id=" + id + ", descricao=" + descricao + ", cliente=" + cliente + ", valor=" + valor
+				+ ", data=" + data + "]";
 	}
+
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((cliente == null) ? 0 : cliente.hashCode());
+		result = prime * result + ((data == null) ? 0 : data.hashCode());
 		result = prime * result + ((descricao == null) ? 0 : descricao.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((valor == null) ? 0 : valor.hashCode());
 		return result;
 	}
+
 
 	@Override
 	public boolean equals(Object obj) {
@@ -102,11 +128,16 @@ public class Servicos implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Servicos other = (Servicos) obj;
+		ServicoPrestado other = (ServicoPrestado) obj;
 		if (cliente == null) {
 			if (other.cliente != null)
 				return false;
 		} else if (!cliente.equals(other.cliente))
+			return false;
+		if (data == null) {
+			if (other.data != null)
+				return false;
+		} else if (!data.equals(other.data))
 			return false;
 		if (descricao == null) {
 			if (other.descricao != null)
@@ -125,6 +156,7 @@ public class Servicos implements Serializable {
 			return false;
 		return true;
 	}
-	
+
+
 	
 }
