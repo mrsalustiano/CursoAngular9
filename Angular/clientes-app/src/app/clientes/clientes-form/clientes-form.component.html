@@ -1,6 +1,6 @@
 <h1 class="mt-4">Clientes</h1>
 <ol class="breadcrumb mb-4">
-    <li class="breadcrumb-item active">Cadastro</li>
+    <li class="breadcrumb-item active">{{ cliente.id ? 'Edição' : 'Cadastro' }}</li>
 </ol>
 <div class="container">
 
@@ -51,12 +51,20 @@
         </div>
 
         <div class="row">
-            <div class="col-md-2">
-                <button type="submit" class="btn btn-success">
-                <i class="fa fa-save"></i>&nbsp;Salvar
-            </button>
-            </div>
+            <div class="col-md-3">
+                <button type="submit" class="btn btn-success" *ngIf="!cliente.id">
+                    <i class="fa fa-save"></i>&nbsp;Salvar
+                </button>
 
+                <button type="submit" class="btn btn-primary" *ngIf="cliente.id">
+                    <i class="fa fa-sync-alt"></i>&nbsp;Atualizar
+                </button>
+
+
+                <button type="button" class="btn btn-danger ml-1" (click)="voltarLista()">
+                    <i class="fa fa-arrow-alt-circle-left" aria-hidden="true"></i>&nbsp;Cancelar
+                </button>
+            </div>
         </div>
     </form>
 </div>

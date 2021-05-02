@@ -1,5 +1,7 @@
 package com.mrsalustiano.clientes.rest;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,6 +69,10 @@ public class ClienteController {
 		
 	}
 	
-	
+	@GetMapping
+	public List<Cliente> getAll(){
+		return repository.findAll();
+		
+	}
 
 }
